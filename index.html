@@ -12,14 +12,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.7.77/Tone.js"></script>
 
     <style>
-      /* All CSS code is now here */
       :root {
-        --primary-color: #818cf8; /* Indigo */
-        --secondary-color: #f472b6; /* Pink */
-        --background-start: #1e1b4b; /* Dark Indigo */
-        --background-end: #312e81; /* Indigo */
-        --text-color: #e0e7ff; /* Lavender */
-        --card-bg: rgba(255, 255, 255, 0.05);
+        --primary-color: #f472b6; /* Pink */
+        --secondary-color: #60a5fa; /* Blue */
+        --background-sky: #87ceeb;
+        --background-ground: #fde68a;
+        --text-color: #44403c; /* Stone-700 */
+        --card-bg: rgba(255, 255, 255, 0.7);
       }
 
       html {
@@ -28,18 +27,125 @@
 
       body {
         font-family: 'Poppins', sans-serif;
-        background: linear-gradient(135deg, var(--background-start), var(--background-end));
+        background-color: var(--background-ground);
         color: var(--text-color);
         overflow-x: hidden;
         cursor: none;
       }
 
-      /* FEATURE 1: Magic Cursor Effect */
+      #disney-background {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
+        background: linear-gradient(to bottom, #1c2c5c 0%, #3a598a 60%, #fde68a 100%);
+      }
+      .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle 3s infinite ease-in-out;
+        box-shadow: 0 0 5px white, 0 0 10px white;
+      }
+      .star1 {
+        top: 10%;
+        left: 20%;
+        width: 3px;
+        height: 3px;
+        animation-delay: 0s;
+      }
+      .star2 {
+        top: 30%;
+        left: 80%;
+        width: 2px;
+        height: 2px;
+        animation-delay: 0.5s;
+      }
+      .star3 {
+        top: 50%;
+        left: 50%;
+        width: 4px;
+        height: 4px;
+        animation-delay: 1s;
+      }
+      .star4 {
+        top: 80%;
+        left: 10%;
+        width: 2px;
+        height: 2px;
+        animation-delay: 1.5s;
+      }
+      .star5 {
+        top: 60%;
+        left: 90%;
+        width: 3px;
+        height: 3px;
+        animation-delay: 2s;
+      }
+      @keyframes twinkle {
+        0%,
+        100% {
+          opacity: 0.2;
+          transform: scale(0.5);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1.2);
+        }
+      }
+
+      .lantern {
+        position: absolute;
+        bottom: -100px;
+        width: 30px;
+        height: 45px;
+        background: #ffc500;
+        border-radius: 40% 40% 10% 10%;
+        box-shadow: 0 0 20px #ffc500, 0 0 30px #ffc500;
+        animation: float-up linear infinite;
+      }
+      .lantern1 {
+        left: 15%;
+        animation-duration: 25s;
+        animation-delay: 0s;
+      }
+      .lantern2 {
+        left: 35%;
+        animation-duration: 20s;
+        animation-delay: 5s;
+        transform: scale(0.8);
+      }
+      .lantern3 {
+        left: 70%;
+        animation-duration: 30s;
+        animation-delay: 2s;
+      }
+      @keyframes float-up {
+        to {
+          transform: translateY(-120vh);
+          opacity: 0;
+        }
+      }
+
+      .castle-silhouette {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%) scale(0.8);
+        width: 400px;
+        height: 200px;
+        opacity: 0.1;
+        transition: opacity 0.5s, transform 0.5s;
+      }
+
       .magic-cursor {
         position: fixed;
         width: 25px;
         height: 25px;
-        border: 2px solid var(--secondary-color);
+        border: 2px solid var(--primary-color);
         border-radius: 50%;
         left: 0;
         top: 0;
@@ -48,24 +154,21 @@
         transition: all 0.15s ease;
         z-index: 9999;
       }
-
       .magic-cursor.is-hovering {
-        background-color: var(--secondary-color);
+        background-color: var(--primary-color);
         transform: translate(-50%, -50%) scale(1.5);
       }
-
       .sparkle {
         position: fixed;
         width: 10px;
         height: 10px;
-        background-color: var(--primary-color);
+        background-color: var(--secondary-color);
         border-radius: 50%;
         pointer-events: none;
         z-index: 9998;
         animation: sparkle-anim 0.6s forwards;
         opacity: 0.8;
       }
-
       @keyframes sparkle-anim {
         0% {
           transform: scale(1.2);
@@ -77,17 +180,16 @@
         }
       }
 
-      /* FEATURE 2: Parallax Hero Section */
       .hero-container {
         height: 100vh;
         overflow: hidden;
         position: relative;
       }
       .hero-bg {
-        background-image: linear-gradient(to bottom, rgba(30, 27, 75, 0.4), var(--background-start)), url('img/nama-foto-utama.jpg');
+        background-image: linear-gradient(to bottom, rgba(28, 44, 92, 0), rgba(253, 230, 138, 0.6)), url('img/nama-foto-utama.jpg');
         background-size: cover;
         background-position: center;
-        background-attachment: fixed; /* Parallax effect */
+        background-attachment: fixed;
         position: absolute;
         top: 0;
         left: 0;
@@ -100,10 +202,9 @@
         position: relative;
       }
 
-      /* FEATURE 3: Animated Text */
       .section-title {
         font-weight: 800;
-        color: white;
+        color: #86198f;
         position: relative;
         padding-bottom: 15px;
         font-size: 2.5rem;
@@ -114,7 +215,6 @@
         transform: translateY(20px);
         animation: char-rise 0.5s forwards;
       }
-
       @keyframes char-rise {
         to {
           opacity: 1;
@@ -122,14 +222,15 @@
         }
       }
 
-      /* FEATURE 4: Glassmorphism Cards */
+      .card-container {
+        perspective: 1000px;
+      }
       .card {
         background: var(--card-bg);
         backdrop-filter: blur(10px);
         border-radius: 24px;
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
         z-index: 10;
         position: relative;
         overflow: hidden;
@@ -137,14 +238,16 @@
         transform: translateY(30px);
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
+      .card.tiltable {
+        transition: opacity 0.6s ease-out, transform 0.1s linear;
+      }
       .card.is-visible,
       .fade-in.is-visible {
         opacity: 1;
         transform: translateY(0);
       }
       .card:hover {
-        transform: translateY(-10px) scale(1.02);
-        box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45);
+        box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.15);
       }
 
       .btn-primary {
@@ -163,7 +266,7 @@
 
       .nav-link {
         font-weight: 600;
-        color: var(--text-color);
+        color: #701a75;
         transition: color 0.3s ease;
         position: relative;
         padding: 5px 0;
@@ -182,7 +285,6 @@
         width: 100%;
       }
 
-      /* FEATURE 5: Interactive Gallery */
       .gallery-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -192,8 +294,9 @@
         position: relative;
         overflow: hidden;
         border-radius: 16px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
         transition: transform 0.4s ease;
+        cursor: pointer;
       }
       .gallery-item:hover {
         transform: scale(1.05);
@@ -214,7 +317,7 @@
         left: 0;
         width: 100%;
         padding: 1rem;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
         color: white;
         transform: translateY(100%);
         transition: transform 0.4s ease;
@@ -229,7 +332,7 @@
         right: 30px;
         width: 50px;
         height: 50px;
-        background: var(--secondary-color);
+        background: var(--primary-color);
         color: white;
         border-radius: 50%;
         display: none;
@@ -251,27 +354,165 @@
         transform: translateY(30px);
         transition: opacity 0.6s ease-out, transform 0.6s ease-out;
       }
+
+      .image-reveal-container {
+        position: relative;
+        overflow: hidden;
+        border-radius: 24px;
+      }
+      .image-reveal-container::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--secondary-color);
+        transform: translateX(-101%);
+        transition: transform 0.8s cubic-bezier(0.7, 0, 0.3, 1);
+      }
+      .image-reveal-container.is-visible::after {
+        transform: translateX(101%);
+      }
+      .image-reveal-container img {
+        opacity: 0;
+        transition: opacity 0.5s 0.3s;
+      }
+      .image-reveal-container.is-visible img {
+        opacity: 1;
+      }
+
+      #lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+      #lightbox.active {
+        opacity: 1;
+        pointer-events: all;
+      }
+      #lightbox img {
+        max-width: 90%;
+        max-height: 80%;
+        box-shadow: 0 0 25px rgba(0, 0, 0, 0.8);
+      }
+      .lightbox-close {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+        font-size: 40px;
+        color: white;
+        cursor: pointer;
+      }
+      .lightbox-nav {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 50px;
+        color: white;
+        cursor: pointer;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 10px;
+        border-radius: 50%;
+      }
+      .lightbox-prev {
+        left: 20px;
+      }
+      .lightbox-next {
+        right: 20px;
+      }
+
+      #music-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1001;
+        width: 40px;
+        height: 40px;
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(5px);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+
+      /* FITUR BARU: Animasi Kata-kata */
+      .popup-word {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 20px 40px;
+        background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+        color: white;
+        border-radius: 20px;
+        font-size: 2rem;
+        font-weight: bold;
+        z-index: 10001;
+        animation: popup-anim 1.5s forwards;
+        pointer-events: none;
+      }
+      @keyframes popup-anim {
+        0% {
+          transform: translate(-50%, -50%) scale(0);
+          opacity: 0;
+        }
+        50% {
+          transform: translate(-50%, -50%) scale(1.2);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(-50%, -150%) scale(0.5);
+          opacity: 0;
+        }
+      }
     </style>
   </head>
   <body class="antialiased relative">
+    <div id="disney-background">
+      <div class="star star1"></div>
+      <div class="star star2"></div>
+      <div class="star star3"></div>
+      <div class="star star4"></div>
+      <div class="star star5"></div>
+      <div class="lantern lantern1"></div>
+      <div class="lantern lantern2"></div>
+      <div class="lantern lantern3"></div>
+      <svg class="castle-silhouette" viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M 50 100 L 50 60 L 40 50 L 40 40 L 45 35 L 55 35 L 60 40 L 60 50 L 50 60 M 150 100 L 150 60 L 160 50 L 160 40 L 155 35 L 145 35 L 140 40 L 140 50 L 150 60 M 70 100 L 70 70 L 130 70 L 130 100 M 90 70 L 90 40 L 80 30 L 85 20 L 95 20 L 100 30 L 110 20 L 115 20 L 120 30 L 110 40 L 110 70"
+          fill="#000"
+        />
+      </svg>
+    </div>
     <div class="magic-cursor"></div>
 
     <header class="bg-transparent fixed top-0 left-0 w-full z-50 transition-all duration-300" id="header">
       <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-        <a href="#" class="text-2xl font-extrabold text-white">Yeong-woo! 🧸</a>
+        <a href="#" class="text-2xl font-extrabold text-fuchsia-900">Yeong-woo! 🧸</a>
         <div class="hidden md:flex space-x-8">
           <a href="#about" class="nav-link">About Me</a>
           <a href="#works" class="nav-link">My Works</a>
           <a href="#gallery" class="nav-link">Gallery</a>
           <a href="#contact" class="nav-link">Say Hi!</a>
         </div>
-        <button id="mobile-menu-button" class="md:hidden text-white">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-          </svg>
+        <button id="mobile-menu-button" class="md:hidden text-fuchsia-900">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" /></svg>
         </button>
       </nav>
-      <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 text-center bg-black/50 backdrop-blur-lg">
+      <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 text-center bg-white/80 backdrop-blur-lg">
         <a href="#about" class="block py-2 nav-link">About Me</a>
         <a href="#works" class="block py-2 nav-link">My Works</a>
         <a href="#gallery" class="block py-2 nav-link">Gallery</a>
@@ -279,12 +520,20 @@
       </div>
     </header>
 
+    <div id="music-toggle">
+      <svg id="music-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#4c1d95" viewBox="0 0 16 16">
+        <path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z" />
+        <path fill-rule="evenodd" d="M9 3v10H8V3h1z" />
+        <path d="M8 2.5a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-1 0v-10A.5.5 0 0 1 8 2.5z" />
+      </svg>
+    </div>
+
     <div class="hero-container">
       <div class="hero-bg"></div>
       <section class="hero-content h-screen flex items-center justify-center text-center">
-        <div class="bg-black/20 backdrop-blur-sm p-8 rounded-3xl shadow-lg">
-          <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight">Hi, I'm Yeong-woo!</h1>
-          <p class="mt-4 text-xl md:text-2xl text-gray-200">Nice to meet you here~ 🌸</p>
+        <div class="bg-white/30 backdrop-blur-sm p-8 rounded-3xl shadow-lg">
+          <h1 class="text-5xl md:text-7xl font-extrabold text-fuchsia-900 tracking-tight">Hi, I'm Yeong-woo!</h1>
+          <p class="mt-4 text-xl md:text-2xl text-stone-700">Nice to meet you here~ 🌸</p>
         </div>
       </section>
     </div>
@@ -293,15 +542,15 @@
       <section id="about" class="fade-in">
         <h2 class="section-title text-center mb-12">A Little About Me</h2>
         <div class="flex flex-col md:flex-row items-center gap-12">
-          <div class="md:w-1/3">
+          <div class="md:w-1/3 image-reveal-container">
             <img
               src="img/WhatsApp Image 2025-07-23 at 11.20.36_9baf4a6e.jpg"
               alt="Choo Yeong-woo with an award"
-              class="rounded-3xl shadow-2xl w-full transform -rotate-3"
+              class="shadow-2xl w-full transform -rotate-3"
               onerror="this.onerror=null;this.src='https://placehold.co/400/500/fecaca/991b1b?text=Image+Failed+to+Load';"
             />
           </div>
-          <div class="md:w-2/3 text-lg text-gray-300">
+          <div class="md:w-2/3 text-lg">
             <p class="mb-4">Hello everyone! 💖 My name is Choo Yeong-woo (추영우). I was born on June 5, 1999. I love acting and I'm currently with J,WIDE-COMPANY agency.</p>
             <p class="mb-6">I became known through the dramas "School 2021" and "Oasis". I also starred in a very heartwarming drama called "Once Upon a Small Town". Thank you so much for supporting all my work!</p>
             <a href="#contact" class="btn-primary inline-block">Check out my socials!</a>
@@ -312,20 +561,26 @@
       <section id="works" class="fade-in">
         <h2 class="section-title text-center mb-12">My Works</h2>
         <div class="grid md:grid-cols-3 gap-8">
-          <div class="card p-8 text-center">
-            <div class="text-6xl mb-4">💪</div>
-            <h3 class="text-2xl font-bold text-white mb-2">Oasis</h3>
-            <p class="text-gray-300">As Choi Cheol-woong, I played a complex character.</p>
+          <div class="card-container">
+            <div class="card tiltable p-8 text-center">
+              <div class="text-6xl mb-4">💪</div>
+              <h3 class="text-2xl font-bold text-pink-600 mb-2">Oasis</h3>
+              <p>As Choi Cheol-woong, I played a complex character.</p>
+            </div>
           </div>
-          <div class="card p-8 text-center">
-            <div class="text-6xl mb-4">🏫</div>
-            <h3 class="text-2xl font-bold text-white mb-2">School 2021</h3>
-            <p class="text-gray-300">As Jung Young-joo, a mysterious transfer student.</p>
+          <div class="card-container">
+            <div class="card tiltable p-8 text-center">
+              <div class="text-6xl mb-4">🏫</div>
+              <h3 class="text-2xl font-bold text-pink-600 mb-2">School 2021</h3>
+              <p>As Jung Young-joo, a mysterious transfer student.</p>
+            </div>
           </div>
-          <div class="card p-8 text-center">
-            <div class="text-6xl mb-4">👨‍⚕️</div>
-            <h3 class="text-2xl font-bold text-white mb-2">Once Upon a Small Town</h3>
-            <p class="text-gray-300">A vet in a quiet village. The atmosphere was so peaceful!</p>
+          <div class="card-container">
+            <div class="card tiltable p-8 text-center">
+              <div class="text-6xl mb-4">👨‍⚕️</div>
+              <h3 class="text-2xl font-bold text-pink-600 mb-2">Once Upon a Small Town</h3>
+              <p>A vet in a quiet village. The atmosphere was so peaceful!</p>
+            </div>
           </div>
         </div>
       </section>
@@ -333,19 +588,19 @@
       <section id="gallery" class="fade-in">
         <h2 class="section-title text-center mb-12">New Photo Gallery</h2>
         <div class="gallery-grid">
-          <div class="gallery-item">
+          <div class="gallery-item" data-word="Dreamy ✨">
             <img src="img/WhatsApp Image 2025-07-23 at 11.20.35_a0bc6d19.jpg" alt="Gallery Photo 1" class="gallery-img" />
             <div class="gallery-overlay"><h3>Formal Look</h3></div>
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item" data-word="Cool 😎">
             <img src="img/WhatsApp Image 2025-07-23 at 11.42.32_5819553a.jpg" alt="Gallery Photo 2" class="gallery-img" />
             <div class="gallery-overlay"><h3>Casual Days</h3></div>
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item" data-word="Shine 🌟">
             <img src="img/WhatsApp Image 2025-07-23 at 11.20.34_87d15741.jpg" alt="Gallery Photo 3" class="gallery-img" />
             <div class="gallery-overlay"><h3>Photoshoot</h3></div>
           </div>
-          <div class="gallery-item">
+          <div class="gallery-item" data-word="Awesome! 🎉">
             <img src="img/WhatsApp Image 2025-07-23 at 11.20.36_7e2d47ba.jpg" alt="Gallery Photo 4" class="gallery-img" />
             <div class="gallery-overlay"><h3>Behind the Scenes</h3></div>
           </div>
@@ -354,8 +609,8 @@
 
       <section id="contact" class="fade-in">
         <div class="card max-w-2xl mx-auto p-8 text-center">
-          <h2 class="text-3xl font-bold text-white mb-4">Wanna Connect? 💌</h2>
-          <p class="text-gray-300 mb-6">You can find me on Instagram! Don't forget to follow!</p>
+          <h2 class="text-3xl font-bold text-pink-600 mb-4">Wanna Connect? 💌</h2>
+          <p class="mb-6">You can find me on Instagram! Don't forget to follow!</p>
           <a href="https://www.instagram.com/cu.young/" target="_blank" class="btn-primary inline-flex items-center gap-2">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
               <path
@@ -371,11 +626,18 @@
     </main>
 
     <footer class="text-center py-8 relative z-10">
-      <p class="text-gray-400">Made with ❤️ for Choo Yeong-woo's fans.</p>
-      <p class="text-sm text-gray-500 mt-2">&copy; 2025 | Fun Project</p>
+      <p class="text-gray-500">Made with ❤️ for Choo Yeong-woo's fans.</p>
+      <p class="text-sm text-gray-600 mt-2">&copy; 2025 | Fun Project</p>
     </footer>
 
     <div id="back-to-top"><span>🚀</span></div>
+
+    <div id="lightbox">
+      <span class="lightbox-close">&times;</span>
+      <span class="lightbox-nav lightbox-prev">&#10094;</span>
+      <img id="lightbox-img" src="" />
+      <span class="lightbox-nav lightbox-next">&#10095;</span>
+    </div>
 
     <script>
       document.addEventListener('DOMContentLoaded', () => {
@@ -385,7 +647,8 @@
 
         const cursor = document.querySelector('.magic-cursor');
         document.addEventListener('mousemove', (e) => {
-          cursor.setAttribute('style', `top: ${e.pageY}px; left: ${e.pageX}px;`);
+          cursor.style.top = `${e.pageY}px`;
+          cursor.style.left = `${e.pageX}px`;
           const sparkle = document.createElement('div');
           sparkle.className = 'sparkle';
           sparkle.style.top = `${e.pageY}px`;
@@ -404,16 +667,14 @@
             entries.forEach((entry) => {
               if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                if (entry.target.classList.contains('section-title')) {
-                  animateText(entry.target);
-                }
+                if (entry.target.classList.contains('section-title')) animateText(entry.target);
               }
             });
           },
           { threshold: 0.1 }
         );
 
-        document.querySelectorAll('.card, .fade-in').forEach((el) => observer.observe(el));
+        document.querySelectorAll('.card, .fade-in, .image-reveal-container').forEach((el) => observer.observe(el));
 
         function animateText(element) {
           if (element.dataset.animated) return;
@@ -431,16 +692,20 @@
 
         const backToTopButton = document.getElementById('back-to-top');
         const header = document.getElementById('header');
+        const castle = document.querySelector('.castle-silhouette');
         window.addEventListener('scroll', () => {
           if (window.scrollY > 300) {
             backToTopButton.style.display = 'flex';
-            header.style.backgroundColor = 'rgba(30, 27, 75, 0.8)';
+            header.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
             header.style.backdropFilter = 'blur(10px)';
           } else {
             backToTopButton.style.display = 'none';
             header.style.backgroundColor = 'transparent';
             header.style.backdropFilter = 'none';
           }
+          const scrollPercent = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight);
+          castle.style.opacity = 0.1 + scrollPercent * 0.3;
+          castle.style.transform = `translateX(-50%) scale(${0.8 + scrollPercent * 0.4})`;
         });
 
         backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
@@ -448,12 +713,94 @@
         const synth = new Tone.Synth().toDestination();
         document.querySelectorAll('.nav-link, .btn-primary, #back-to-top').forEach((button) => {
           button.addEventListener('click', (e) => {
-            if (e.target.closest('a')?.target !== '_blank') {
-              synth.triggerAttackRelease('C5', '8n');
-            } else if (!e.target.closest('a')) {
-              synth.triggerAttackRelease('C5', '8n');
-            }
+            if (e.target.closest('a')?.target !== '_blank') synth.triggerAttackRelease('C5', '8n');
+            else if (!e.target.closest('a')) synth.triggerAttackRelease('C5', '8n');
           });
+        });
+
+        document.querySelectorAll('.tiltable').forEach((card) => {
+          card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const { width, height } = rect;
+            const rotateX = (y / height - 0.5) * -20;
+            const rotateY = (x / width - 0.5) * 20;
+            card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          });
+          card.addEventListener('mouseleave', () => {
+            card.style.transform = 'rotateX(0) rotateY(0)';
+          });
+        });
+
+        // Lightbox Gallery Logic
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.lightbox-close');
+        const prevBtn = document.querySelector('.lightbox-prev');
+        const nextBtn = document.querySelector('.lightbox-next');
+        let currentIndex = 0;
+
+        const images = Array.from(galleryItems).map((item) => ({
+          src: item.querySelector('img').src,
+          word: item.dataset.word || 'Magic ✨',
+        }));
+
+        function showImage(index) {
+          lightboxImg.src = images[index].src;
+          currentIndex = index;
+        }
+
+        galleryItems.forEach((item, index) => {
+          item.addEventListener('click', (e) => {
+            // Show popup word
+            const word = item.dataset.word || 'Magic ✨';
+            const wordEl = document.createElement('div');
+            wordEl.className = 'popup-word';
+            wordEl.textContent = word;
+            document.body.appendChild(wordEl);
+            setTimeout(() => wordEl.remove(), 1500);
+
+            // Open lightbox after a short delay
+            setTimeout(() => {
+              lightbox.classList.add('active');
+              showImage(index);
+            }, 300);
+          });
+        });
+
+        closeBtn.addEventListener('click', () => lightbox.classList.remove('active'));
+        prevBtn.addEventListener('click', () => {
+          currentIndex = (currentIndex - 1 + images.length) % images.length;
+          showImage(currentIndex);
+        });
+        nextBtn.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % images.length;
+          showImage(currentIndex);
+        });
+
+        // Music Player Logic
+        const musicToggle = document.getElementById('music-toggle');
+        const musicIcon = document.getElementById('music-icon');
+        let isPlaying = false;
+
+        const musicLoop = new Tone.Loop((time) => {
+          const notes = ['C4', 'E4', 'G4', 'B4', 'C5', 'G4', 'E4'];
+          const note = notes[Math.floor(Math.random() * notes.length)];
+          synth.triggerAttackRelease(note, '8n', time);
+        }, '4n').start(0);
+
+        musicToggle.addEventListener('click', async () => {
+          await Tone.start();
+          if (isPlaying) {
+            Tone.Transport.stop();
+            musicIcon.innerHTML = `<path d="M9 13c0 1.105-1.12 2-2.5 2S4 14.105 4 13s1.12-2 2.5-2 2.5.895 2.5 2z"/><path fill-rule="evenodd" d="M9 3v10H8V3h1z"/><path d="M8 2.5a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-1 0v-10A.5.5 0 0 1 8 2.5z"/>`;
+          } else {
+            Tone.Transport.start();
+            musicIcon.innerHTML = `<path d="M12 13c0 1.105-1.12 2-2.5 2S7 14.105 7 13s1.12-2 2.5-2 2.5.895 2.5 2z"/><path fill-rule="evenodd" d="M12 3v10H11V3h1z"/><path d="M11 2.5a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-1 0v-10a.5.5 0 0 1 .5-.5z"/><path d="M4 13c0 1.105-1.12 2-2.5 2S-1 14.105-1 13s1.12-2 2.5-2 2.5.895 2.5 2z"/><path fill-rule="evenodd" d="M4 3v10H3V3h1z"/><path d="M3 2.5a.5.5 0 0 1 .5.5v10a.5.5 0 0 1-1 0v-10A.5.5 0 0 1 3 2.5z"/>`;
+          }
+          isPlaying = !isPlaying;
         });
       });
     </script>
